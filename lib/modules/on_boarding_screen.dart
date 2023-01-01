@@ -38,7 +38,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     ),
   ];
   bool isLast = false;
-
   var pageController = PageController();
 
   @override
@@ -48,8 +47,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              NavigateAndFinsh(
-                  context: context, widget: const ShopLoginScreen());
+              // NavigateAndFinsh(
+              //     context: context, widget: const ShopLoginScreen());
+              navigateTo(context: context, widget: const ShopLoginScreen());
             },
             child: const Text(
               'Skip',
@@ -103,7 +103,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   onPressed: () {
                     if (isLast == true) {
                       NavigateAndFinsh(
-                          context: context, widget: ShopLoginScreen());
+                          context: context, widget: const ShopLoginScreen());
                     } else {
                       pageController.nextPage(
                           duration: const Duration(milliseconds: 750),
@@ -124,13 +124,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 buildBoardingItem(BoardingModel boardingModel) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: Image(
-            image: AssetImage('${boardingModel.image}'),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: Image(
+              image: AssetImage('${boardingModel.image}'),
+            ),
           ),
         ),
         const SizedBox(
