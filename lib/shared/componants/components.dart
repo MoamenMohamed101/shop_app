@@ -38,6 +38,29 @@ defaultFormField({
       onChanged: onChanged,
     );
 
+defaultButton({
+  double? width,
+  Color? color = Colors.blue,
+  @required VoidCallback? voidCallback,
+  @required String? text,
+  bool? isUpperCase = true,
+  double? radius = 10.0,
+}) =>
+    Container(
+      width: width,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(radius!),
+      ),
+      child: MaterialButton(
+        onPressed: voidCallback,
+        child: Text(
+          isUpperCase! ? text!.toUpperCase() : text!,
+          style: const TextStyle(color: Colors.white, fontSize: 20),
+        ),
+      ),
+    );
+
 navigateTo({context, widget}) => Navigator.push(
       context,
       MaterialPageRoute(
