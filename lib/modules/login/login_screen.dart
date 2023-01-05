@@ -74,15 +74,15 @@ class ShopLoginScreen extends StatelessWidget {
                           },
                           text: 'Enter your password',
                           prefixIcon: Icons.lock,
-                          // suffixIcon: Icons.add,
-                          // isPassword: isPassword!,
+                          suffixIcon: Icons.add,
+                          isPassword: isPassword!,
                           iconSuffix: () {},
                         ),
                         const SizedBox(
                           height: 15,
                         ),
                         ConditionalBuilder(
-                          condition: true,
+                          condition: state is! ShopLoginLoadingStates,
                           builder: (context) => defaultButton(
                             color: Colors.blue,
                             text: 'login',
