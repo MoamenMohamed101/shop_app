@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/modules/register_screen.dart';
@@ -18,8 +19,7 @@ class ShopLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>
-          ShopLoginCubit(ShopLoginInitialStates()),
+      create: (BuildContext context) => ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit, ShopLoginStates>(
         builder: (BuildContext context, state) {
           return Scaffold(
@@ -64,20 +64,25 @@ class ShopLoginScreen extends StatelessWidget {
                           height: 15,
                         ),
                         defaultFormField(
-                          controller: passwordController,
-                          keyboard: TextInputType.visiblePassword,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'enter password';
-                            }
-                            return null;
-                          },
-                          text: 'Enter your password',
-                          prefixIcon: Icons.lock,
-                          suffixIcon: Icons.add,
-                          isPassword: isPassword!,
-                          iconSuffix: () {},
-                        ),
+                            controller: passwordController,
+                            keyboard: TextInputType.visiblePassword,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'enter password';
+                              }
+                              return null;
+                            },
+                            text: 'Enter your password',
+                            prefixIcon: Icons.lock,
+                            suffixIcon: Icons.add,
+                            isPassword: isPassword!,
+                            iconSuffix: () {},
+                            onFieldSubmitted: (value) {
+                              ShopLoginCubit.get(context).userLogin(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+                            }),
                         const SizedBox(
                           height: 15,
                         ),
@@ -92,8 +97,6 @@ class ShopLoginScreen extends StatelessWidget {
                                   email: emailController.text,
                                   password: passwordController.text,
                                 );
-                                print(emailController.text);
-                                print(passwordController.text);
                               }
                             },
                             width: double.infinity,
@@ -129,7 +132,32 @@ class ShopLoginScreen extends StatelessWidget {
             ),
           );
         },
-        listener: (BuildContext context, Object? state) {},
+        listener: (BuildContext context, Object? state) {
+          if (state is ShopLoginSuccessStates) {
+            if (state.loginModel.status == true) {
+              print(state.loginModel.message);
+              print(state.loginModel.data!.token);
+              Fluttertoast.showToast(
+                  msg: state.loginModel.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            } else {
+              print(state.loginModel.message);
+              Fluttertoast.showToast(
+                  msg: state.loginModel.message!,
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            }
+          }
+        },
       ),
     );
   }
