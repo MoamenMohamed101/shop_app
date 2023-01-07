@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 myDivider() => Container(height: 1, width: double.infinity, color: Colors.grey);
 
@@ -74,3 +75,30 @@ void NavigateAndFinsh({context, widget}) => Navigator.pushAndRemoveUntil(
       builder: (context) => widget,
     ),
     (Route<dynamic> route) => false);
+
+showToast(String? message, ToastStates states) => Fluttertoast.showToast(
+    msg: message!,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: chooseToastColor(states),
+    textColor: Colors.white,
+    fontSize: 16.0);
+
+enum ToastStates { SUCCESS, ERROR, WARNING }
+
+Color chooseToastColor(ToastStates states) {
+  Color color;
+  switch (states) {
+    case ToastStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToastStates.ERROR:
+      color = Colors.red;
+      break;
+    case ToastStates.WARNING:
+      color = Colors.amber;
+      break;
+  }
+  return color;
+}
