@@ -17,7 +17,7 @@ var lightTheme = ThemeData(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     type: BottomNavigationBarType.fixed,
-    selectedItemColor: Colors.deepOrange,
+    selectedItemColor: defaultColor,
     elevation: 20,
     backgroundColor: Colors.white,
     unselectedItemColor: Colors.grey,
