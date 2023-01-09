@@ -37,7 +37,7 @@ class Products {
   dynamic price;
   dynamic oldPrice;
   dynamic discount;
-  String? image;
+  dynamic image;
   String? description;
   String? name;
   bool? inFavorites;

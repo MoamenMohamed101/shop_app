@@ -50,5 +50,27 @@ productsBuilder(HomeModel homeModel) => Column(
               autoPlayCurve: Curves.fastLinearToSlowEaseIn,
               scrollDirection: Axis.horizontal),
         ),
+        const SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: GridView.count(
+            crossAxisCount: 2,
+            children: List.generate(
+              homeModel.data!.products.length,
+              (index) => buildGridProduct(homeModel.data!.products[index]),
+            ),
+          ),
+        ),
+      ],
+    );
+
+Widget buildGridProduct(Products? products) => Column(
+      children: [
+        Image(
+          image: NetworkImage(products!.image!),
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
       ],
     );
