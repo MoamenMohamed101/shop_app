@@ -29,6 +29,3 @@
 
 // 4- call get method in cubit , give it the url and token , call it when the application start
 //==================================================================================
-// In video Build Shop Layout [2] :-
-
-// 1- Build products images in products screen (CarouselSlider)
