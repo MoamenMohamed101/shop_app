@@ -24,7 +24,7 @@ class DioHelper {
       'Authorization': authorization ?? '',
       'Content-Type': 'application/json'
     };
-    return await dio!.get(url, queryParameters: query ?? null);
+    return await dio!.get(url, queryParameters: query);
   }
 
   static Future<Response>? postData({
