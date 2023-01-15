@@ -185,8 +185,6 @@ Widget buildGridProduct(Products? products, context) => Container(
                     IconButton(
                       onPressed: () {
                         ShopCubit.get(context).changeFavourites(products.id);
-                        print(products.id);
-                        print(products.inFavorites);
                       },
                       icon: CircleAvatar(
                         radius: 18,

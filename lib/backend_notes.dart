@@ -41,4 +41,4 @@
 
 //5- favorites[productId!] = !favorites[productId]!;
 
-//6-
+//6- Show toast if status of changeFavoritesModel false
