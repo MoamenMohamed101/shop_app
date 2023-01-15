@@ -7,4 +7,4 @@ void printFullText(String text) {
       );
 }
 
-const token = '';
+var token = '';

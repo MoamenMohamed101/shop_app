@@ -39,7 +39,7 @@ buildCardItem(DataModel dataModel) => Padding(
           ),
           Text(
             dataModel.name,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const Spacer(),
           const Icon(Icons.arrow_forward_ios)

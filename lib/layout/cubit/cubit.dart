@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/models/categories_model.dart';
+import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/categories_screen.dart';
 import 'package:shop_app/modules/favorites_screen.dart';
@@ -28,13 +29,16 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   HomeModel? homeModel;
+  Map<int, bool> favorites = {};
 
   void getData() {
     emit(ShopLoadingHomeDataStates());
     DioHelper.getData(url: Home, authorization: token)!.then((value) {
       emit(ShopSuccessHomeDataStates());
       homeModel = HomeModel.fromJson(value.data);
-      //print(homeModel.toString());
+      homeModel!.data!.products.forEach((element) {
+        favorites.addAll({element.id!: element.inFavorites!});
+      });
     }).catchError((error) {
       print(error.toString());
       emit(ShopSuccessHomeDataStates());
@@ -42,6 +46,7 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   CategoriesModel? categoriesModel;
+
   void getCategories() {
     emit(ShopLoadingCategoriesStates());
     DioHelper.getData(url: Categories, lang: 'en')!.then((value) {
@@ -51,6 +56,28 @@ class ShopCubit extends Cubit<ShopStates> {
     }).catchError((error) {
       print(error.toString());
       emit(ShopErrorCategoriesStates());
+    });
+  }
+
+  ChangeFavoritesModel? changeFavoritesModel;
+
+  void changeFavourites(int? productId) {
+    favorites[productId!] = !favorites[productId]!;
+    emit(ShopLoadingFavoritesStates());
+    DioHelper.postData(
+      url: Favorites,
+      data: {'product_id': productId},
+    )!
+        .then((value) {
+      changeFavoritesModel = ChangeFavoritesModel.fromJson(value.data);
+      print(value.data);
+      if (changeFavoritesModel!.status == false) {
+        favorites[productId] = !favorites[productId]!;
+      }
+      emit(ShopSuccessFavoritesStates(changeFavoritesModel!));
+    }).catchError((error) {
+      favorites[productId] = !favorites[productId]!;
+      emit(ShopErrorFavoritesStates());
     });
   }
 }

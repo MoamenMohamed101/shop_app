@@ -29,3 +29,16 @@
 
 // 4- call get method in cubit , give it the url and token , call it when the application start
 //==================================================================================
+// Setup Favorites [like a pro] :-
+
+//1- Make map in cubit and give it the id and in_favorites from products in HomeModel by use forEach
+
+//2- call map(favorites) in products screen and toggle between colors on it
+
+//3- Make method in cubit to change product Id
+
+//4- Make Favorites Model
+
+//5- favorites[productId!] = !favorites[productId]!;
+
+//6-

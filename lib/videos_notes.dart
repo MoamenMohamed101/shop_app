@@ -6,6 +6,3 @@
 
 //1- buildGridProduct add (image , name , price , oldPrice , discount)
 //===================================================================================
-// Setup Categories :-
-
-// 1-
