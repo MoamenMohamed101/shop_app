@@ -42,3 +42,9 @@
 //5- favorites[productId!] = !favorites[productId]!;
 
 //6- Show toast if status of changeFavoritesModel false
+
+//7- make favorites screen ui
+
+//8- Make model FavoritesModel from website json to dart
+
+//9-

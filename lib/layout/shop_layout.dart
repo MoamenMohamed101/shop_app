@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
-import 'package:shop_app/shared/componants/components.dart';
+import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 
 class ShopLayout extends StatelessWidget {
@@ -14,7 +14,8 @@ class ShopLayout extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => ShopCubit()
         ..getData()
-        ..getCategories(),
+        ..getCategories()
+        ..getFavorites(),
       child: BlocConsumer<ShopCubit, ShopStates>(
         builder: (BuildContext context, state) {
           var cubit = ShopCubit.get(context);

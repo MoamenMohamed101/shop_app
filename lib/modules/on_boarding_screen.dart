@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
-import 'package:shop_app/shared/componants/components.dart';
+import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

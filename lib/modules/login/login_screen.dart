@@ -7,7 +7,7 @@ import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/modules/register_screen.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 
-import '../../shared/componants/components.dart';
+import '../../shared/components/components.dart';
 
 class ShopLoginScreen extends StatelessWidget {
   ShopLoginScreen({Key? key}) : super(key: key);

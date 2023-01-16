@@ -1,7 +1,9 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
+import 'package:shop_app/models/favorites_model.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -11,19 +13,27 @@ class FavoritesScreen extends StatelessWidget {
     return BlocConsumer<ShopCubit, ShopStates>(
       builder: (BuildContext context, state) {
         var cubit = ShopCubit.get(context);
-        return ListView.separated(
+        return ConditionalBuilder(
+          condition: state is! ShopLoadingGetFavoritesStates,
+          builder: (context) => ListView.separated(
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => buildFavItem(),
+            itemBuilder: (context, index) =>
+                buildFavItem(cubit.favoritesModel!.data!.data![index], context),
             separatorBuilder: (context, index) => Container(
                 color: Colors.grey, width: double.infinity, height: 1),
-            itemCount: 10);
+            itemCount: cubit.favoritesModel!.data!.data!.length,
+          ),
+          fallback: (context) => const Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
       listener: (BuildContext context, Object? state) {},
     );
   }
 }
 
-buildFavItem() => Padding(
+buildFavItem(FavoritesData? favoritesData, context) => Padding(
       padding: const EdgeInsets.all(20.0),
       child: SizedBox(
         height: 120,
@@ -32,15 +42,14 @@ buildFavItem() => Padding(
             Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                const Image(
-                  image: NetworkImage(
-                      'https://th.bing.com/th/id/OIP.PhMqSsHVO7SC7wrIUAlDFgHaDr?pid=ImgDet&rs=1'),
+                Image(
+                  image: NetworkImage('${favoritesData!.product!.image}'),
                   //fit: BoxFit.cover,
                   width: 120,
                   fit: BoxFit.cover,
                   height: 120,
                 ),
-                if (1 != 0)
+                if (favoritesData.product!.discount != 0)
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     color: Colors.red,
@@ -58,26 +67,27 @@ buildFavItem() => Padding(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'pokpokwdpokdwpodkwodkodkwokdwodkdokwkdwokwokpodkwdkw',
+                  Text(
+                    '${favoritesData.product!.name}',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(height: 1.3),
+                    style: const TextStyle(height: 1.3),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     children: [
-                      const Text(
-                        '2000',
-                        style: TextStyle(color: Colors.blue),
+                      Text(
+                        '${favoritesData.product!.price}',
+                        style: const TextStyle(color: Colors.blue),
                       ),
                       const SizedBox(
                         width: 5,
                       ),
-                      if (1 != 0)
-                        const Text(
-                          '2000',
-                          style: TextStyle(
+                      if (favoritesData.product!.oldPrice != 0 &&
+                          favoritesData.product!.discount != 0)
+                        Text(
+                          '${favoritesData.product!.oldPrice}',
+                          style: const TextStyle(
                             color: Colors.grey,
                             decoration: TextDecoration.lineThrough,
                             fontSize: 12,
@@ -86,12 +96,16 @@ buildFavItem() => Padding(
                       const Spacer(),
                       IconButton(
                         onPressed: () {
-                          //ShopCubit.get(context).changeFavourites(products.id);
+                          ShopCubit.get(context)
+                              .changeFavourites(favoritesData.product!.id);
                         },
-                        icon: const CircleAvatar(
+                        icon: CircleAvatar(
                           radius: 18,
-                          backgroundColor: true ? Colors.blue : Colors.grey,
-                          child: Icon(
+                          backgroundColor: ShopCubit.get(context)
+                                  .favorites[favoritesData.product!.id]!
+                              ? Colors.blue
+                              : Colors.grey,
+                          child: const Icon(
                             Icons.favorite_border,
                             size: 20,
                             color: Colors.white,
