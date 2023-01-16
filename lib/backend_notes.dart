@@ -47,4 +47,8 @@
 
 //8- Make model FavoritesModel from website json to dart
 
-//9-
+//9- Make method to get favorites data and put it the data in model
+
+//10- put the data in Favorites screen
+
+//11- Get favorites in changeFavoritesModel
