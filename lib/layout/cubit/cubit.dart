@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/states.dart';
+import 'package:shop_app/models/Login_Model.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/change_favorites_model.dart';
 import 'package:shop_app/models/favorites_model.dart';
@@ -21,7 +22,7 @@ class ShopCubit extends Cubit<ShopStates> {
     const ProductsScreen(),
     const CategoriesScreen(),
     const FavoritesScreen(),
-    const SettingsScreen(),
+    SettingsScreen(),
   ];
 
   void changeBottom(index) {
@@ -93,6 +94,19 @@ class ShopCubit extends Cubit<ShopStates> {
     }).catchError((error) {
       print(error.toString());
       emit(ShopErrorGetFavoritesStates());
+    });
+  }
+
+  ShopLoginModel? userModel;
+  void getProfile() {
+    DioHelper.getData(url: Profile, authorization: token, lang: 'en')!
+        .then((value) {
+      userModel = ShopLoginModel.fromJson(value.data);
+      print(userModel!.data!.name);
+      emit(ShopSuccessGetProfileStates(userModel!));
+    }).catchError((error) {
+      emit(ShopErrorGetProfileStates());
+      print(error.toString());
     });
   }
 }

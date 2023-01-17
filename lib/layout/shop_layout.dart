@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
-import 'package:shop_app/modules/login/login_screen.dart';
-import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/network/local/cash_helper.dart';
 
 class ShopLayout extends StatelessWidget {
   const ShopLayout({Key? key}) : super(key: key);
@@ -15,7 +12,8 @@ class ShopLayout extends StatelessWidget {
       create: (BuildContext context) => ShopCubit()
         ..getData()
         ..getCategories()
-        ..getFavorites(),
+        ..getFavorites()
+        ..getProfile(),
       child: BlocConsumer<ShopCubit, ShopStates>(
         builder: (BuildContext context, state) {
           var cubit = ShopCubit.get(context);
@@ -23,22 +21,6 @@ class ShopLayout extends StatelessWidget {
             body: cubit.screens[cubit.currentIndex],
             appBar: AppBar(
               title: const Text('Salla'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    CacheHelper.removeData('token')!.then((value) {
-                      if (value) {
-                        NavigateAndFinsh(
-                            context: context, widget: ShopLoginScreen());
-                      }
-                    });
-                  },
-                  child: const Text(
-                    'Log out',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-              ],
             ),
             bottomNavigationBar: BottomNavigationBar(
               items: const [

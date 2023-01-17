@@ -5,6 +5,7 @@ import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/modules/register_screen.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 
 import '../../shared/components/components.dart';
@@ -141,6 +142,7 @@ class ShopLoginScreen extends StatelessWidget {
                       key: 'token', value: state.loginModel.data!.token)
                   .then(
                 (value) {
+                  token = state.loginModel.data!.token!;
                   NavigateAndFinsh(
                     context: context,
                     widget: const ShopLayout(),
