@@ -111,10 +111,9 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-
   void updateProfile({dynamic email , String? name , dynamic phone}) {
     emit(ShopLoadingUpdateStates());
-    DioHelper.putData(url: Update, authorization: token, lang: 'en', data: {
+    DioHelper.postData(url: Update, authorization: token, lang: 'en', data: {
       'email':email,
       'name':name,
       'phone':phone,
