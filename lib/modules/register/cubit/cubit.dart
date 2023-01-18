@@ -18,8 +18,12 @@ class ShopRegisterCubit extends Cubit<ShopRegisterStates> {
     String? phone,
   }) {
     emit(ShopRegisterLoadingStates());
-    DioHelper.postData(
-            url: Register, data: {'email': email, 'password': password})!
+    DioHelper.postData(url: Register, data: {
+      'email': email,
+      'password': password,
+      'name': name,
+      'phone': phone,
+    })!
         .then((value) {
       shopLoginModel = ShopLoginModel.fromJson(value.data);
       print(shopLoginModel!.data);

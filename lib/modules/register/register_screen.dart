@@ -1,9 +1,12 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/register/cubit/cubit.dart';
 import 'package:shop_app/modules/register/cubit/states.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constants.dart';
+import 'package:shop_app/shared/network/local/cash_helper.dart';
 import '../login/cubit/cubit.dart';
 
 class ShopRegisterScreen extends StatelessWidget {
@@ -110,6 +113,16 @@ class ShopRegisterScreen extends StatelessWidget {
                           },
                           text: 'Enter Phone',
                           prefixIcon: Icons.phone,
+                          onFieldSubmitted: (value){
+                            if (formKey.currentState!.validate()) {
+                              ShopRegisterCubit.get(context).userRegister(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: nameController.text,
+                                  phone: phoneController.text
+                              );
+                            }
+                          }
                         ),
                         const SizedBox(
                           height: 15,
@@ -143,7 +156,26 @@ class ShopRegisterScreen extends StatelessWidget {
               ),
             );
           },
-          listener: (BuildContext context, Object? state) {},
+          listener: (BuildContext context, Object? state) {
+            if (state is ShopRegisterSuccessStates) {
+              if (state.loginModel.status == true) {
+                showToast(state.loginModel.message, ToastStates.SUCCESS);
+                CacheHelper.saveData(
+                    key: 'token', value: state.loginModel.data!.token)
+                    .then(
+                      (value) {
+                   // token = state.loginModel.data!.token!;
+                    NavigateAndFinsh(
+                      context: context,
+                      widget: const ShopLayout(),
+                    );
+                  },
+                );
+              } else {
+                showToast(state.loginModel.message, ToastStates.ERROR);
+              }
+            }
+          },
         ),
       ),
     );

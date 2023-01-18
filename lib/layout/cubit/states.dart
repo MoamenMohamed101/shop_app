@@ -44,3 +44,13 @@ class ShopSuccessGetProfileStates extends ShopStates {
 }
 
 class ShopErrorGetProfileStates extends ShopStates {}
+
+class ShopLoadingUpdateStates extends ShopStates {}
+
+class ShopSuccessUpdateStates extends ShopStates {
+  final ShopLoginModel userModel;
+
+  ShopSuccessUpdateStates(this.userModel);
+}
+
+class ShopErrorUpdateStates extends ShopStates {}
