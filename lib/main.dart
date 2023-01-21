@@ -7,10 +7,11 @@ import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/on_boarding_screen.dart';
 import 'package:shop_app/modules/search_screen/cubit.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
-import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
+
+import 'shared/components/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

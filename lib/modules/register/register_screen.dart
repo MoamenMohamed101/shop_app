@@ -164,7 +164,7 @@ class ShopRegisterScreen extends StatelessWidget {
                     key: 'token', value: state.loginModel.data!.token)
                     .then(
                       (value) {
-                   // token = state.loginModel.data!.token!;
+                   token = state.loginModel.data!.token!;
                     NavigateAndFinsh(
                       context: context,
                       widget: const ShopLayout(),

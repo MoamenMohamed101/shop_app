@@ -52,7 +52,7 @@ class SearchScreen extends StatelessWidget {
                         itemBuilder: (context, index) => buildListProduct(
                           cubit.searchModel!.data!.data![index],
                           context,
-                          //isOldPrice: false
+                          isOldPrice: false,
                         ),
                         separatorBuilder: (context, index) => Container(
                           color: Colors.grey,

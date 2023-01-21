@@ -112,7 +112,7 @@ productsBuilder(
             child: GridView.count(
               crossAxisSpacing: 1,
               mainAxisSpacing: 1,
-              childAspectRatio: 1 / 1.57,
+              childAspectRatio: 1 / 1.7,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,

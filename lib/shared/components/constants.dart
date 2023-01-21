@@ -11,7 +11,7 @@ void printFullText(String text) {
       );
 }
 
-var token = '';
+String? token = '';
 
 signOut(context) {
   CacheHelper.removeData('token')!.then((value) {

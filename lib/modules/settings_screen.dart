@@ -81,12 +81,12 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   defaultButton(
                     voidCallback: () {
-                      // if (formKey.currentState!.validate()) {
-                      //   cubit.updateProfile(
-                      //       email: emailController.text,
-                      //       name: nameController.text,
-                      //       phone: phoneController.text);
-                      // }
+                      if (formKey.currentState!.validate()) {
+                        cubit.updateProfile(
+                            email: emailController.text,
+                            name: nameController.text,
+                            phone: phoneController.text);
+                      }
                     },
                     text: 'UPDATE',
                     width: double.infinity,

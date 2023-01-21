@@ -80,6 +80,7 @@ class ShopCubit extends Cubit<ShopStates> {
       emit(ShopSuccessFavoritesStates(changeFavoritesModel!));
     }).catchError((error) {
       favorites[productId] = !favorites[productId]!;
+      print(error.toString());
       emit(ShopErrorFavoritesStates());
     });
   }
@@ -98,7 +99,6 @@ class ShopCubit extends Cubit<ShopStates> {
   }
 
   ShopLoginModel? userModel;
-
   void getProfile() {
     DioHelper.getData(url: Profile, authorization: token, lang: 'en')!
         .then((value) {
@@ -113,7 +113,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
   void updateProfile({dynamic email , String? name , dynamic phone}) {
     emit(ShopLoadingUpdateStates());
-    DioHelper.postData(url: Update, authorization: token, lang: 'en', data: {
+    DioHelper.putData(url: Update, authorization: token, lang: 'en', data: {
       'email':email,
       'name':name,
       'phone':phone,
