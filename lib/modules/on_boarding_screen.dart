@@ -108,7 +108,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast == true) {
-                      onSubmit;
+                      setState(() {
+                        onSubmit;
+                      });
                     } else {
                       pageController.nextPage(
                           duration: const Duration(milliseconds: 750),
