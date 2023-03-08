@@ -59,7 +59,7 @@ class SearchScreen extends StatelessWidget {
                           width: double.infinity,
                           height: 1,
                         ),
-                        itemCount: 5,
+                        itemCount: cubit.searchModel!.data!.data!.length,
                       ),
                     ),
                 ],

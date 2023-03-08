@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
-import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 class FavoritesScreen extends StatelessWidget {

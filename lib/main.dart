@@ -9,7 +9,6 @@ import 'package:shop_app/shared/bloc_observer.dart';
 import 'package:shop_app/shared/network/local/cash_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
-
 import 'shared/components/constants.dart';
 
 void main() async {

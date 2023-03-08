@@ -23,18 +23,18 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List onBoarding = [
     BoardingModel(
-      title: 'On Board 1 Title',
-      body: 'On Board 1 Body',
-      image: 'assets/images/1.jpg',
+      title: 'Many gifts',
+      body: 'Always try to take advantage of offers and discounts',
+      image: 'assets/images/11.jpg',
     ),
     BoardingModel(
-      title: 'On Board 2 Title',
-      body: 'On Board 2 Body',
+      title: 'Online shopping',
+      body: 'Shop from home without any effort',
       image: 'assets/images/2.jpg',
     ),
     BoardingModel(
-      title: 'On Board 3 Title',
-      body: 'On Board 3 Body',
+      title: 'Easy shopping',
+      body: 'Use the easiest tools to shop',
       image: 'assets/images/3.jpg',
     ),
   ];
@@ -137,8 +137,12 @@ buildBoardingItem(BoardingModel boardingModel) => Column(
               borderRadius: BorderRadius.circular(20),
             ),
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Image(
-              image: AssetImage('${boardingModel.image}'),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Image(
+                image: AssetImage('${boardingModel.image}'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

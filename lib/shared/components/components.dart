@@ -25,14 +25,14 @@ defaultFormField({
         labelText: text!,
         border: const OutlineInputBorder(),
         prefixIcon: Icon(prefixIcon!),
-        suffixIcon: suffixIcon != null
-            ? IconButton(
-                onPressed: iconSuffix,
-                icon: isPassword
-                    ? const Icon(Icons.visibility_off)
-                    : const Icon(Icons.remove_red_eye),
-              )
-            : null,
+        // suffixIcon: suffixIcon != null
+        //     ? IconButton(
+        //         onPressed: iconSuffix,
+        //         icon: isPassword
+        //             ? const Icon(Icons.visibility_off)
+        //             : const Icon(Icons.remove_red_eye),
+        //       )
+        //     : null,
       ),
       keyboardType: keyboard,
       obscureText: isPassword,

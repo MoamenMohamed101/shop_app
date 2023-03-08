@@ -76,21 +76,21 @@ class SettingsScreen extends StatelessWidget {
                     text: 'Phone Number',
                     prefixIcon: Icons.phone,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  defaultButton(
-                    voidCallback: () {
-                      if (formKey.currentState!.validate()) {
-                        cubit.updateProfile(
-                            email: emailController.text,
-                            name: nameController.text,
-                            phone: phoneController.text);
-                      }
-                    },
-                    text: 'UPDATE',
-                    width: double.infinity,
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
+                  // defaultButton(
+                  //   voidCallback: () {
+                  //     if (formKey.currentState!.validate()) {
+                  //       cubit.updateProfile(
+                  //           email: emailController.text,
+                  //           name: nameController.text,
+                  //           phone: phoneController.text);
+                  //     }
+                  //   },
+                  //   text: 'UPDATE',
+                  //   width: double.infinity,
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
